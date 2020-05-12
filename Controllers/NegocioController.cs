@@ -58,14 +58,15 @@ namespace Ejercicio02.Controllers
 
             //Definir el # de registros por pagina
             int num = 15;
-
+      /*      int inicio=0;
+            int final = num;*/
             //Definir el nro de paginas (Botones)
             int c = temporal.Count();
             int pags = c % num > 0 ? c / num + 1 : c / num;
 
             ViewBag.pags = pags;
             ViewBag.p = p; // Almaceno el nmro de la pagina 
-
+            
             return View(temporal.Skip(p * num).Take(num));
         }
 
@@ -113,7 +114,7 @@ namespace Ejercicio02.Controllers
             ViewBag.nombre = nombre;
             ViewBag.p = p; // Almaceno el nmro de la pagina 
 
-            return View(temporal.Skip(p * num).Take(num));
+            return View(temporal.Skip(p * num).Take(num));//comeinza de la posicion p*num ,toma 5 paginas
         }
 
     }

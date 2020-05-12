@@ -56,10 +56,34 @@
 
 </table>
 
-<p>
+<p style="text-align:center">
+
+    <!-- boton inicio-->
+    @Html.ActionLink("◄", //alt + 17
+               "PaginacionClientes",
+               "Negocio",
+               new { p = 0 },
+               new
+               {
+                   @class = "btn btn-danger" // Se pintara el botoncito de la paginacion
+               })
+    <!-- boton anterior-->
+    @if (ViewBag.p > 0)
+    {
+        @Html.ActionLink("←", //alt + 27
+         "PaginacionClientes",
+         "Negocio",
+         new { p = (ViewBag.p - 1) },
+         new
+         {
+             @class = "btn btn-warning"
+         })
+    }
+
     <!--agregando los botones de la paginacion-->
     @for (int i = 0; i < (int)ViewBag.pags; i++)
     {
+
         if (i == (int)ViewBag.p)
         {
 
@@ -85,5 +109,30 @@
         }
 
     }
+
+    <!-- boton siguiente-->
+    
+    @if (ViewBag.p < ViewBag.pags-1)
+    {
+        @Html.ActionLink("→", //alt+ 26
+         "PaginacionClientes",
+         "Negocio",
+         new { p = (ViewBag.p + 1) },
+         new
+         {
+             @class = "btn btn-warning"
+         })
+    }
+
+    <!-- boton final-->
+    @Html.ActionLink("►", //alt +16
+              "PaginacionClientes",
+              "Negocio",
+              new { p = ViewBag.pags - 1 },
+              new
+              {
+                  @class = "btn btn-danger" // Se pintara el botoncito de la paginacion
+              })
+
 
 </p>
