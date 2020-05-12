@@ -3422,3 +3422,14 @@ create procedure sp_clientes
 as
 select * from tb_Clientes;
 go
+
+create proc sp_clientes_nombre
+@nombre varchar(60)
+as
+begin
+if(len(rtrim(@nombre)))=0
+Select IdCliente,NombreCia,Direccion,NombrePais, Telefono from tb_clientes c join tb_paises p on c.idpais= p.Idpais where 1=2
+else
+Select  IdCliente,NombreCia,Direccion,NombrePais, Telefono  from tb_clientes c join tb_paises p on c.idpais= p.Idpais where NombreCia like @nombre+'%'
+end 
+go

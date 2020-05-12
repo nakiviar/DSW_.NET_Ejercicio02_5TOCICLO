@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Ejercicio02.Models.Cliente>
+
+@{
+    ViewBag.Title = "PaginacionClientesFiltro";
+}
+
+<h2>PaginacionClientesFiltro</h2>
+
+@using (Html.BeginForm())
+{
+    <em>iniciales del Nombre</em>
+    @Html.TextBox("nombre") <!-- El mismo nombre del parametro -->
+    <button>Procesar</button>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
+
+
+<!-- Paginacion -->
+@for (int i = 0; i <(int)ViewBag.pags ; i++) {
+    @Html.ActionLink((i + 1).ToString(),
+                        "PaginacionClientesFiltro",//Nombre del action
+                        "Negocio",//Nombre del controlador
+                        new { p = i, nombre = ViewBag.nombre},
+                        new
+                        {
+                            @class = "btn btn-default"
+                        })
+}

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Ejercicio02.Models.Cliente>
+
+@{
+    ViewBag.Title = "PaginacionClientes";
+}
+
+<h2>PaginacionClientes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    <!--agregando los botones de la paginacion-->
+    @for (int i = 0; i < (int)ViewBag.pags; i++)
+    {
+        if (i == (int)ViewBag.p)
+        {
+
+            @Html.ActionLink((i + 1).ToString(),
+                        "PaginacionClientes",//Nombre del action
+                        "Negocio",//Nombre del controlador
+                        new { p = i },
+                        new
+                             {
+                                 @class = "btn btn-primary" // Se pintara el botoncito de la paginacion
+                            })
+        }
+        else
+        {
+            @Html.ActionLink((i + 1).ToString(),
+                        "PaginacionClientes",//Nombre del action
+                        "Negocio",//Nombre del controlador
+                        new { p = i },
+                        new
+                             {
+                                 @class = "btn btn-default"
+                            })
+        }
+
+    }
+
+</p>
